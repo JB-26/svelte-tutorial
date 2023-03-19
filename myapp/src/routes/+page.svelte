@@ -1,4 +1,17 @@
 <script>
+    import NumberArray from "./numberArray.svelte";
+    import Nested from "./nested.svelte";
+    import Info from "./info.svelte";
+	import Logged from "./logged.svelte";
+	import ElseIf from "./elseIf.svelte";
+
+    const pkg = {
+        name: 'svelte',
+        version: 3,
+        speed: 'blazing',
+        website: 'https://svelte.dev'
+    }
+
     let count = 0;
     // Reactivity! Not just for variables, but for statements as well
     // Reactivity = do something whenever something changes
@@ -13,18 +26,6 @@
         console.log('the count is ' + count);
         alert('I SAID THE COUNT IS ' + count);
     }
-
-    // Svelte's reactivity is triggered by assignments. Methods that mutate arrays or objects will not trigger updates by themselves.
-    // assign numbers to itself to tell the compiler it has changed
-
-    let numbers = [1, 2, 3, 4];
-
-	function addNumber() {
-		numbers.push(numbers.length + 1);
-		numbers = numbers;
-	}
-
-	$: sum = numbers.reduce((t, n) => t + n, 0);
 </script>
 
 <h1>Welcome to SvelteKit</h1>
@@ -34,8 +35,17 @@
 
 <p>{count} doubled is {doubled}</p>
 
-<p>{numbers.join(' + ')} = {sum}</p>
 
-<button on:click={addNumber}>
-	Add a number
-</button>
+<NumberArray></NumberArray>
+
+<Nested answer={'42'}/>
+
+<Nested />
+
+<Info name = {pkg.name} version = {pkg.version} speed = {pkg.speed} website = {pkg.website} />
+
+<Info {...pkg}/>
+
+<Logged></Logged>
+
+<ElseIf></ElseIf>
